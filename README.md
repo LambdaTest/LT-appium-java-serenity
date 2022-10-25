@@ -41,7 +41,7 @@ Before you can start performing App automation testing with Appium, you would ne
 
 ### Clone The Sample Project
 
-Clone the LambdaTest’s [LT-appium-python-gauge](https://github.com/LambdaTest/LT-appium-java-serenity) and navigate to the code directory as shown below:
+Clone the LambdaTest’s [LT-appium-java-serenity](https://github.com/LambdaTest/LT-appium-java-serenity) and navigate to the code directory as shown below:
 
 ```bash
 git clone https://github.com/LambdaTest/LT-appium-java-serenity
