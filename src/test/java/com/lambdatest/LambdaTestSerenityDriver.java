@@ -16,13 +16,6 @@ public class LambdaTestSerenityDriver implements DriverSource {
 	public WebDriver newDriver() {
 		EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
 
-		//		String username = System.getenv("LT_USERNAME") == null ? "Your LT Username" : System.getenv("LT_USERNAME");         //Add your LT username here
-		//		String accessKey = System.getenv("LT_ACCESS_KEY") == null ? "Your LT AccessKey" : System.getenv("LT_ACCESS_KEY");    //Add your LT accessKey here
-		//		String appId = System.getenv("LT_APP_ID") == null ? "lt://proverbial-android" : System.getenv("LT_APP_ID");    //Add your LT appId here
-		//		String gridUrl = System.getenv("LT_GRID_URL") == null ? "mobile-hub.lambdatest.com" : System.getenv("LT_GRID_URL");    //Add LT gridUrl here
-
-
-
 		String environment = "single";
 
 		String username = System.getenv("LT_USERNAME") == null ? "Your LT Username" : System.getenv("LT_USERNAME");         //Add your LT username here
