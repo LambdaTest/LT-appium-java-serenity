@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -42,7 +43,7 @@ public class LambdaTestScenario implements AfterAWebdriverScenario, BeforeAWebdr
 			String environment = System.getProperty("environment");
 
 			URI uri = new URI("https://" + username + ":" + accessKey
-					+ "@api.lambdatest.com/automation/api/v1/sessions/" + sessionId);
+				+ "@api.lambdatest.com/automation/api/v1/sessions/" + sessionId);
 			HttpPatch putRequest = new HttpPatch(uri);
 
 			String result = "completed";
@@ -60,7 +61,7 @@ public class LambdaTestScenario implements AfterAWebdriverScenario, BeforeAWebdr
 			} else {
 
 				entity = new StringEntity("{\"name\":\"" + testOutcome.getStoryTitle() + " - " + testOutcome.getTitle()
-						+ "\",\"status_ind\":" + "\"" + result + "\"}");
+					+ "\",\"status_ind\":" + "\"" + result + "\"}");
 			}
 
 			putRequest.setEntity(entity);
@@ -73,11 +74,22 @@ public class LambdaTestScenario implements AfterAWebdriverScenario, BeforeAWebdr
 	}
 
 	@Override
+	public boolean isActivated(EnvironmentVariables environmentVariables) {
+		return AfterAWebdriverScenario.super.isActivated(environmentVariables);
+	}
+
+
 	public DesiredCapabilities apply(EnvironmentVariables environmentVariables, SupportedWebDriver driver,
-			TestOutcome testOutcome, DesiredCapabilities capabilities) {
+		TestOutcome testOutcome, DesiredCapabilities capabilities) {
 
 		capabilities.setCapability("name", testOutcome.getStoryTitle() + " - " + testOutcome.getTitle());
 		return capabilities;
 
+	}
+
+	@Override
+	public MutableCapabilities apply(EnvironmentVariables environmentVariables, SupportedWebDriver supportedWebDriver,
+		TestOutcome testOutcome, MutableCapabilities mutableCapabilities) {
+		return null;
 	}
 }
