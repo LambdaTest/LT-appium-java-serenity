@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lambdatest</groupId>
@@ -14,40 +15,19 @@
         <java.version>1.8</java.version>
         <java.source.version>${java.version}</java.source.version>
         <java.target.version>${java.version}</java.target.version>
-        <maven.version>3.5.3</maven.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>2.0.48</serenity.version>
-        <serenity.maven.version>2.0.67</serenity.maven.version>
-        <serenity.cucumber.version>1.9.37</serenity.cucumber.version>
-
-        <maven.failsafe-plugin.version>3.0.0-M3</maven.failsafe-plugin.version>
-        <maven.surefire-plugin.version>3.0.0-M3</maven.surefire-plugin.version>
-        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
+        <serenity.version>3.5.1</serenity.version>
+        <serenity.maven.version>3.5.1</serenity.maven.version>
+        <serenity.cucumber.version>3.5.1</serenity.cucumber.version>
         <maven.compiler-plugin.version>3.8.0</maven.compiler-plugin.version>
 
         <jetty-io.version>10.0.2</jetty-io.version>
         <jetty-util.version>10.0.2</jetty-util.version>
 
     </properties>
-
-    <repositories>
-        <repository>
-            <id>serenity</id>
-            <name>bintray</name>
-            <url>http://dl.bintray.com/serenity/maven</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>serenity</id>
-            <name>bintray-plugins</name>
-            <url>http://dl.bintray.com/serenity/maven</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -96,6 +76,12 @@
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-osgi</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.googlecode.lambdaj</groupId>
@@ -112,60 +98,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>${maven-enforcer-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <configuration>
-                            <rules>
-                                <requireUpperBoundDeps/>
-                            </rules>
-                        </configuration>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire-plugin.version}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler-plugin.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven.failsafe-plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <include>com/lambdatest/cucumber/SingleTest.java</include>
-                    </includes>
-                    <reuseForks>true</reuseForks>
-                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>
                 <artifactId>serenity-maven-plugin</artifactId>
@@ -197,18 +129,21 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven.failsafe-plugin.version}</version>
+                        <version>3.0.0-M5</version>
                         <configuration>
                             <includes>
-                                <include>com/lambdatest/cucumber/SingleTest.java</include>
+                                <include>**/SingleTest*.java</include>
                             </includes>
                             <reuseForks>true</reuseForks>
-                            <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                            <systemPropertyVariables>
-                                <environment>single</environment>
-                                <taskID>MY_TEST_SCHEMA_${surefire.forkNumber}</taskID>
-                            </systemPropertyVariables>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -218,23 +153,6 @@
             <id>parallel</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven.failsafe-plugin.version}</version>
-                        <configuration>
-                            <includes>
-                                <include>com/lambdatest/cucumber/ParallelAndroid*.java</include>
-                            </includes>
-                            <parallel>classes</parallel>
-                            <threadCount>10</threadCount>
-                            <forkCount>10</forkCount>
-                            <reuseForks>true</reuseForks>
-                            <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                            <systemPropertyVariables>
-                                <environment>rd_${surefire.forkNumber}</environment>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
