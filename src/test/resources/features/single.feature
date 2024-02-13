@@ -1,6 +1,6 @@
 Feature: Do native app automation
 
-  @maven_tunnel_parallel_verification
+  @maven_tunnel_parallel_verification @single_feature
   Scenario: Proverbial App scenario
 
     Given user is on the App home page
