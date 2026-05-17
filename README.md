@@ -1,4 +1,4 @@
-# Run Appium Java Serenity Tests on TestMu AI (Formerly LambdaTest)
+﻿# Run Appium Java Serenity Tests on TestMu AI (Formerly LambdaTest)
 
 <p align="center">
   <a href="https://www.testmuai.com/"><img src="https://img.shields.io/badge/MADE%20BY%20TestMu%20AI-000000.svg?style=for-the-badge&labelColor=000" alt="Made by TestMu AI"></a>
@@ -18,8 +18,8 @@ With TestMu AI (Formerly LambdaTest), you can run Appium Java Serenity tests acr
 ### Prerequisites
 
 - **Java Development Kit (JDK)** 1.6 or higher (latest version recommended).
-- **Maven** installed. Download from the [official website](https://maven.apache.org/) or install via [Homebrew](https://brew.sh/) on Linux/macOS.
-- A [TestMu AI account](https://www.testmuai.com/register/). Retrieve your **Username** and **Access Key** from the [TestMu AI Automation Dashboard](https://appautomation.testmuai.com/).
+- **Maven** installed. Download from the official website or install via Homebrew on Linux/macOS.
+- A TestMu AI account. Retrieve your **Username** and **Access Key** from the TestMu AI Automation Dashboard.
 
 ### Setup
 
